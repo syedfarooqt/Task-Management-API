@@ -94,6 +94,9 @@ public Page<Task> getAllTasks(int page, int size, String sortBy) {
             }
             taskRepository.save(task);
         }
+        else {
+            throw new RuntimeException("Task not found with ID: " + id);
+        }
     }catch (Exception ex){
         log.error("An error occurred while retrieving task : {} ", ex.getMessage(), ex);
         throw ex;

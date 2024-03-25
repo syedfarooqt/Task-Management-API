@@ -14,7 +14,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.annotation.Secured;
+
 
 import javax.validation.Valid;
 import java.text.ParseException;
@@ -25,8 +28,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @RestController
-@RequestMapping("/tasks")
 @Slf4j
+@RequestMapping("/tasks")
 public class TaskController {
 
     @Autowired
@@ -36,6 +39,7 @@ public class TaskController {
 
     // CRUD operations for tasks
     @PostMapping("/create")
+//    @PreAuthorize("hasRole('ADMIN')")
     public Task createTask(@RequestBody @Valid Task task) {
         log.info("Received request to create task: {}", task);
         try {
